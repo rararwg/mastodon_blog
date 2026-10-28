@@ -3,6 +3,4 @@
 icon: fas fa-info-circle
 order: 4
 ---
-
-> Add Markdown syntax content to file `_tabs/about.md`{: .filepath } and it will show up on this page.
-{: .prompt-tip }
+[rhabarberbarbara.bar](https://rhabarberbarbara.bar/about) 是私人运营的长毛象站点，服务器位于德国。这个博客记录了一些维护经验。
