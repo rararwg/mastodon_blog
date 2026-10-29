@@ -27,7 +27,9 @@ docker compose -f .devcontainer/compose.yaml up -d
 docker compose -f .devcontainer/compose.yaml exec app bin/setup
 docker compose -f .devcontainer/compose.yaml exec app bin/dev
 ```
-这些完成以后，我们就可以在 <http://localhost:3000> 看到实例跑起来了。自动创建的管理员账号是 `admin@localhost`，密码是 `mastodonadmin`。
+这些完成以后，我们就可以在 <http://localhost:3000> [^1] 看到实例跑起来了。自动创建的管理员账号是 `admin@localhost`，密码是 `mastodonadmin`。
+
+[^1]: 有的浏览器（比如 Safari）可能会强制把 http 改成 https，导致页面报“无法与服务器建立安全连接”的错误。你可以选择换一个浏览器尝试，比如 Firefox。
 
 然后就可以愉快地改代码了！
 
