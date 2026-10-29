@@ -31,5 +31,5 @@ docker compose -f .devcontainer/compose.yaml exec app bin/dev
 
 然后就可以愉快地改代码了！
 
-如果你只改 `.rb`, `.js` 和 `.jsx` 这些文件的话，只要保存改动就好了，刚刚跑的 `bin/dev` 会自动编译的。
+如果你只改 `.rb`, `.js`, `.jsx` 和 `.scss` 这类文件的话，只要保存改动就好了，刚刚跑的 `bin/dev` 会自动编译的。
 效果满意之后，就可以 commit change 然后按照你熟悉的方式部署代码了。
