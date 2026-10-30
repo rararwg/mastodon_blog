@@ -6,14 +6,15 @@ categories: mastodon 开发
 ---
 小站自从 3.5 版本后就几年没有更新了，最近一口气更新到了 4.7，尤其之前的操作系统还是很老的 Ubuntu 18.04，过程还是挺麻烦的，所以这里记录一下更新过程。
 
-## 备份
+## 升级前的准备
+### 备份
 ‼️最重要的事情就是升级之前一定要备份‼️这样后面搞砸了可以回滚，我就搞砸了两次。我的服务器供应商是 Hetzner，那里可以创建 Backup，搞砸之后从 Backup 里 Rebuild 就好了。
+### 去掉个性化改动
+我的站点做了很多个性化的改动，但是新版本的毛象发生了非常多的变化，不管是 `rebase` 还是 `merge` 都会特别麻烦， 所以我决定暂时去掉这些改动，先升级，成功之后再陆续加上。
 ## 升级
-
+新版本的毛象对系统版本也有要求，所以系统也要更新。为了保险起见，我这里是先更新到 Ubuntu 20.04，然后把毛象 4.2 跑起来，确认没事之后再更新到 Ubuntu 24.04，接着继续更新毛象。
 ### 升级 Ubuntu 系统
-新版本的毛象对系统版本也有要求，所以必须更新。为了保险起见，我这里是先更新到 20.04，然后把毛象 4.2 跑起来，确认没事之后再更新到 24.04，接着继续更新毛象。
-
-Ubuntu 的升级过程是这样的
+Ubuntu 不能跨版本升级，只能一个个往上升。过程是这样的
 ```bash
 sudo apt update && sudo apt dist-upgrade -y
 sudo apt autoremove -y
@@ -59,13 +60,13 @@ su - mastodon
 cd ~/live
 RAILS_ENV=production bundle exec rails db:migrate
 ```
-如果站点开启全文搜索的话，可能还需要重新 config 一遍 elasticsearch，这里官方也有[教程](https://docs.joinmastodon.org/admin/elasticsearch/)。
+如果站点开启全文搜索的话，可能还需要重新设置一遍 Elasticsearch，这里官方也有[教程](https://docs.joinmastodon.org/admin/elasticsearch/)。
 
 ## 遇到的问题
 我在更新过程中踩了两个大坑
 - **升级 PostgreSQL 的时候不小心删库了**
 
-  升级 Ubuntu 系统的时候我一口气把 PostgreSQL 从 10 升级到了 18，看见数据库跑起来我以为万事大吉，就把旧版本删了，于是原来的数据库直接没了。正确的升级方式是这样的[^1]（假设从 PostgreSQL 10 更新到 12）:
+  升级 Ubuntu 系统的时候我一口气把 PostgreSQL 从 10 升级到了 18，看见数据库跑起来我以为万事大吉，就把旧版本删了，结果原来的数据库直接没了。正确的升级方式是这样的[^1]（假设从 PostgreSQL 10 更新到 12）:
   
   首先在 terminal 跑
   ```bash
