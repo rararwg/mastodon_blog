@@ -38,10 +38,11 @@ git pull
 cd ~/.rbenv/plugins/ruby-build
 git pull
 ```
-然后就是更新毛象
+然后就是更新到特定版本的毛象[^3]
 ```bash
 cd ~/live
-RUBY_CONFIGURE_OPTS=--with-jemalloc rbenv install
+git fetch && git checkout v4.3.9 # 举例，改成自己要更新到的版本
+```RUBY_CONFIGURE_OPTS=--with-jemalloc rbenv install
 bundle install && yarn install --immutable
 RAILS_ENV=production bundle exec rails assets:precompile
 SKIP_POST_DEPLOYMENT_MIGRATIONS=true RAILS_ENV=production bundle exec rails db:migrate
@@ -91,3 +92,4 @@ RAILS_ENV=production bundle exec rails db:migrate
 
 [^1]: 参考 [Upgrading Mastodon from PostgreSQL 15 to PostgreSQL 17](https://blog.thms.uk/2025/06/upgrade-postgres-15-17-mastodon/)
 [^2]: 升级 Ubuntu 的时候系统会提示有新版本的 PostgreSQL，如果你选择现在创建新的 cluster，那么新版本就会是 online 状态，如果选否，那就不会是 online 状态。选哪个都行。
+[^3]: 如果没有确定的版本号，只是想更新到最新版本，那也可以 <code class="language-plaintext highlighter-rouge" style="font-size: inherit;">git fetch --tags && git rebase $(git tag -l | grep -v 'rc[0-9]*$' | sort -V | tail -n 1)
