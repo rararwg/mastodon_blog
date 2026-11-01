@@ -21,7 +21,7 @@ sudo apt autoremove -y
 sudo do-release-upgrade
 ```
 接着 `reboot` 就可以升级到下一个版本了。后续的升级重复以上步骤就可以了。
-### 升级 `ruby`
+### 升级 ruby
 这个在每次升级前做一次就好了
 ```bash
 su - mastodon
