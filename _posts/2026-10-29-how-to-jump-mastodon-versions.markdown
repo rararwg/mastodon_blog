@@ -21,17 +21,8 @@ sudo apt autoremove -y
 sudo do-release-upgrade
 ```
 接着 `reboot` 就可以升级到下一个版本了。后续的升级重复以上步骤就可以了。
-
-### 升级长毛象
-
-官方的[升级指南](https://github.com/mastodon/mastodon/releases/tag/v4.7.4)在列出升级步骤的同时也会强调这是从上一个小版本的升级步骤，如果跨版本的话那么也要参照之前的升级指南。为了保险起见我是一个版本一个版本更新的，具体的过程是这样：
-
-假设现在的版本是 4.2.x，接下来要更新到 4.3，那么就去查看 [4.4 的 release notes](https://github.com/mastodon/mastodon/releases/tag/v4.4.0)，上面写着
-> The following instructions are for updating from 4.3.9.
-
-所以我们的下一个更新目标就是 4.3.9。接下来查看从 4.3.0 到 4.3.9 所有的 release notes，看里面是否提到[标准升级过程](#标准升级过程)以外的东西。如果有的话，就先 `checkout` 那个版本，然后按照提示来。如果没有的话，直接 `checkout` 目标版本（比如 4.3.9），然后执行[标准升级过程](#标准升级过程)。确认跑起来之后，再重复以上步骤更新到下一个大版本。
-#### 标准升级过程
-更新 `ruby`。这个在升级前做一次就可以了。
+### 升级 `ruby`
+这个在每次升级前做一次就好了
 ```bash
 su - mastodon
 cd ~/.rbenv
@@ -39,11 +30,19 @@ git pull
 cd ~/.rbenv/plugins/ruby-build
 git pull
 ```
-然后就是更新到特定版本的毛象[^3]
+### 升级长毛象
+官方的[升级指南](https://github.com/mastodon/mastodon/releases/tag/v4.7.4)在列出升级步骤的同时也会强调这是从上一个小版本的升级步骤，如果跨版本的话那么也要参照之前的升级指南。为了保险起见我是一个版本一个版本更新的，具体的过程是这样：
+
+假设现在的版本是 4.2.x，接下来要更新到 4.3，那么就去查看 [4.4 的 release notes](https://github.com/mastodon/mastodon/releases/tag/v4.4.0)，上面写着
+> The following instructions are for updating from 4.3.9.
+
+所以我们的下一个更新目标就是 4.3.9。接下来查看从 4.3.0 到 4.3.9 所有的 release notes，看里面是否提到[标准升级过程](#标准升级过程)以外的东西。如果有的话，就先 `checkout` 那个版本，然后按照提示来。如果没有的话，直接 `checkout` 目标版本（比如 4.3.9），然后执行[标准升级过程](#标准升级过程)。确认跑起来之后，再重复以上步骤更新到下一个大版本。
+#### 标准升级过程
+更新到特定版本的毛象[^3]
 ```bash
 cd ~/live
 git fetch && git checkout v4.3.9 # 举例，改成自己要更新到的版本
-```RUBY_CONFIGURE_OPTS=--with-jemalloc rbenv install
+RUBY_CONFIGURE_OPTS=--with-jemalloc rbenv install
 bundle install && yarn install --immutable
 RAILS_ENV=production bundle exec rails assets:precompile
 SKIP_POST_DEPLOYMENT_MIGRATIONS=true RAILS_ENV=production bundle exec rails db:migrate
