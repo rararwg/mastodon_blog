@@ -61,6 +61,9 @@ RAILS_ENV=production bundle exec rails db:migrate
 ```
 如果站点开启全文搜索的话，可能还需要重新设置一遍 Elasticsearch，这里官方也有[教程](https://docs.joinmastodon.org/admin/elasticsearch/)。
 
+### 加上个性化改动
+这一步就比较麻烦了，需要认真对比改动，有需要的话可以参考另一篇博文： [如何在部署长毛象之前预览和测试改动](../how-to-create-a-development-environment-for-mastodon)。
+
 ## 遇到的问题
 我在更新过程中踩了两个大坑
 - **升级 PostgreSQL 的时候不小心删库了**
